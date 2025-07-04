@@ -92,8 +92,8 @@ def main():
     <style>
     #linkedin-float {
       position: fixed;
-      bottom: 20px;
-      right: 20px;
+      bottom: 80px;
+      right: 10px;
       background-color: #0077b5;
       color: white;
       padding: 10px 16px;
