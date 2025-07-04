@@ -80,7 +80,39 @@ def main():
                 text_chunks = get_text_chunks(raw_text)
                 get_vector_store(text_chunks)
                 st.success("Done")
+        
+        # ✅ Sidebar contact info (inside sidebar!)
+        st.markdown("---")
+        st.markdown("### 📬 Contact Me")
+        st.markdown("[📧 Email](mailto:sankethhonavar25@gmail.com)")
+        st.markdown("[🔗 LinkedIn](https://linkedin.com/in/sanketh-honavar)")
+    
+    # ✅ Floating LinkedIn button (at end of main)
+    st.markdown("""
+    <style>
+    #linkedin-float {
+      position: fixed;
+      bottom: 20px;
+      right: 20px;
+      background-color: #0077b5;
+      color: white;
+      padding: 10px 16px;
+      border-radius: 50%;
+      font-size: 20px;
+      text-align: center;
+      z-index: 1000;
+      box-shadow: 2px 2px 8px rgba(0,0,0,0.2);
+      text-decoration: none;
+    }
+    #linkedin-float:hover {
+      background-color: #005983;
+    }
+    </style>
+
+    <a id="linkedin-float" href="https://linkedin.com/in/sanketh-honavar" target="_blank">in</a>
+    """, unsafe_allow_html=True)
 
 
-if __name__ == "__main__":
-    main()
+    if __name__ == "__main__":
+        main()
+
