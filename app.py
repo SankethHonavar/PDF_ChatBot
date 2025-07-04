@@ -75,7 +75,7 @@ def main():
         st.title("Menu:")
         pdf_docs = st.file_uploader("Upload your PDF Files and Click on the Submit & Process Button", accept_multiple_files=True)
         if not pdf_docs:
-            st.markdown("ℹ️ **Upload a PDF to enable the Submit button**")
+            st.markdown("<span style='color:orange;'>⚠️ Please upload at least one PDF to enable the Submit button.</span>", unsafe_allow_html=True)
         if st.button("Submit & Process", disabled=not pdf_docs):
             with st.spinner("Processing..."):
                 raw_text = get_pdf_text(pdf_docs)
