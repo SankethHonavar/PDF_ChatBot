@@ -6,3 +6,4 @@ venv/
 penv/
 .venv/
 try.py
+faiss_index/
