@@ -111,7 +111,7 @@ def main():
             <span class="tooltiptext">📄 Upload at least one PDF</span>
             </div>
             """, unsafe_allow_html=True)
-        if st.button("Submit & Process", disabled=not pdf_docs):
+        if st.button("Submit & Process"):
             with st.spinner("Processing..."):
                 raw_text = get_pdf_text(pdf_docs)
                 text_chunks = get_text_chunks(raw_text)
