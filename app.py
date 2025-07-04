@@ -14,7 +14,6 @@ from dotenv import load_dotenv
 load_dotenv()
 genai.configure(api_key=os.getenv("GOOGLE_API_KEY"))
 
-
 def get_pdf_text(pdf_docs):
     text = ""
     for pdf in pdf_docs:
@@ -23,18 +22,15 @@ def get_pdf_text(pdf_docs):
             text += page.extract_text()
     return text
 
-
 def get_text_chunks(text):
     text_splitter = RecursiveCharacterTextSplitter(chunk_size=10000, chunk_overlap=1000)
     chunks = text_splitter.split_text(text)
     return chunks
 
-
 def get_vector_store(text_chunks):
     embeddings = GoogleGenerativeAIEmbeddings(model="models/embedding-001")
     vector_store = FAISS.from_texts(text_chunks, embedding=embeddings)
     vector_store.save_local("faiss_index")
-
 
 def get_conversational_chain():
     prompt_template = """
@@ -51,7 +47,6 @@ def get_conversational_chain():
     chain = load_qa_chain(model, chain_type="stuff", prompt=prompt)
     return chain
 
-
 def user_input(user_question):
     embeddings = GoogleGenerativeAIEmbeddings(model="models/embedding-001")
     new_db = FAISS.load_local("faiss_index", embeddings, allow_dangerous_deserialization=True)
@@ -59,7 +54,6 @@ def user_input(user_question):
     chain = get_conversational_chain()
     response = chain.invoke({"input_documents": docs, "question": user_question})
     st.write("📌 **Answer:**", response["output_text"])
-
 
 def main():
     st.set_page_config("Chat PDF", page_icon="📚")
@@ -69,59 +63,76 @@ def main():
         st.title("📁 Menu")
         theme_mode = st.radio("🌓 Theme", ["Light", "Dark"], horizontal=True)
 
-    # 🔁 Apply custom CSS based on theme
+    # ✅ Apply theme styles
     if theme_mode == "Dark":
-        st.markdown(
-            """
-            <style>
-            body, .stApp {
-                background-color: #1e1e1e;
-                color: white;
-            }
-            .stTextInput input {
-                background-color: #333;
-                color: white;
-            }
-            .stButton>button {
-                background-color: #444;
-                color: white;
-            }
-            </style>
-            """, unsafe_allow_html=True
-        )
+        st.markdown("""
+        <style>
+        :root {
+            --text-color: #eee;
+            --primary-color: #025c97;
+        }
+        body, .stApp {
+            background-color: #1e1e1e !important;
+            color: var(--text-color) !important;
+        }
+        .stTextInput input {
+            background-color: #333 !important;
+            color: var(--text-color) !important;
+        }
+        .stTextInput label {
+            color: var(--text-color) !important;
+        }
+        input::placeholder {
+            color: #bbb !important;
+            opacity: 1 !important;
+        }
+        .stButton>button {
+            background-color: #444 !important;
+            color: var(--text-color) !important;
+        }
+        </style>
+        """, unsafe_allow_html=True)
     else:
-        st.markdown(
-            """
-            <style>
-            body, .stApp {
-                background-color: #ffffff;
-                color: black;
-            }
-            .stTextInput input {
-                background-color: #f0f0f0;
-                color: black;
-            }
-            .stButton>button {
-                background-color: #e0e0e0;
-                color: black;
-            }
-            </style>
-            """, unsafe_allow_html=True
-        )
+        st.markdown("""
+        <style>
+        :root {
+            --text-color: #111;
+            --primary-color: #025c97;
+        }
+        body, .stApp {
+            background-color: #ffffff !important;
+            color: var(--text-color) !important;
+        }
+        .stTextInput input {
+            background-color: #f0f0f0 !important;
+            color: var(--text-color) !important;
+        }
+        .stTextInput label {
+            color: var(--text-color) !important;
+        }
+        input::placeholder {
+            color: #444 !important;
+            opacity: 1 !important;
+        }
+        .stButton>button {
+            background-color: #e0e0e0 !important;
+            color: var(--text-color) !important;
+        }
+        </style>
+        """, unsafe_allow_html=True)
 
     # 🚀 App header and input
     st.header("📚 Chat with Your PDFs using Gemini 💁")
 
     user_question = st.text_input(
         "💬 Ask a Question from the PDF",
-        placeholder="e.g., What is the purpose of this document?",
+        placeholder="e.g., What is the summary of this document?",
         label_visibility="visible"
     )
 
     if user_question:
         user_input(user_question)
 
-    # Help section
     st.markdown("""
     ---
     ### 🤖 How to Use:
@@ -149,24 +160,30 @@ def main():
         st.markdown("---")
         st.markdown("### 📬 Contact Me")
         st.markdown("[📧 Email](mailto:sankethhonavar25@gmail.com)")
-        st.markdown("[🔗 LinkedIn](https://linkedin.com/in/sanketh-honavar)")
+        st.markdown("[🔗 LinkedIn](https://linkedin.com/in/sankethhonavar)")
 
     # ✨ Floating contact buttons
     st.markdown("""
     <style>
-    #linkedin-float {
-      position: fixed;
-      bottom: 20px;
-      right: 20px;
-      background-color: #0077b5;
-      color: white;
-      padding: 10px 16px;
-      border-radius: 50%;
-      font-size: 20px;
-      text-align: center;
-      z-index: 1000;
-      box-shadow: 2px 2px 8px rgba(0,0,0,0.2);
-      text-decoration: none;
+    .floating-button {
+        position: fixed;
+        bottom: 20px;
+        right: 20px;
+        display: flex;
+        flex-direction: column;
+        gap: 10px;
+        z-index: 9999;
+    }
+    .floating-button a {
+        background-color: #0077b5;
+        color: white;
+        padding: 10px 14px;
+        border-radius: 50%;
+        text-align: center;
+        font-size: 20px;
+        text-decoration: none;
+        box-shadow: 2px 2px 8px rgba(0, 0, 0, 0.3);
+        transition: background-color 0.3s;
     }
     .floating-button a:hover {
         background-color: #005983;
@@ -181,10 +198,9 @@ def main():
 
     <div class="floating-button">
         <a href="mailto:sankethhonavar25@gmail.com" class="email" title="Email Me">✉</a>
-        <a href="https://linkedin.com/in/sanketh-honavar" target="_blank" title="Connect on LinkedIn">in</a>
+        <a href="https://linkedin.com/in/sankethhonavar" target="_blank" title="Connect on LinkedIn">in</a>
     </div>
     """, unsafe_allow_html=True)
-
 
 if __name__ == "__main__":
     main()
