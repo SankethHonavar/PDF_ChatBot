@@ -74,44 +74,7 @@ def main():
     with st.sidebar:
         st.title("Menu:")
         pdf_docs = st.file_uploader("Upload your PDF Files and Click on the Submit & Process Button", accept_multiple_files=True)
-        if not pdf_docs:
-            st.markdown("""
-            <style>
-            .tooltip {
-            position: relative;
-            display: inline-block;
-            cursor: not-allowed;
-            }
-
-            .tooltip .tooltiptext {
-            visibility: hidden;
-            width: 180px;
-            background-color: #333;
-            color: #fff;
-            text-align: center;
-            border-radius: 6px;
-            padding: 5px;
-            position: absolute;
-            z-index: 1;
-            bottom: 125%; /* position above */
-            left: 50%;
-            margin-left: -90px;
-            opacity: 0;
-            transition: opacity 0.3s;
-            }
-
-            .tooltip:hover .tooltiptext {
-            visibility: visible;
-            opacity: 1;
-            }
-            </style>
-
-            <div class="tooltip">
-            <button disabled style="padding:10px 20px; font-size:16px;">Submit & Process</button>
-            <span class="tooltiptext">📄 Upload at least one PDF</span>
-            </div>
-            """, unsafe_allow_html=True)
-        if st.button("Submit & Process"):
+        if st.button("Submit & Process", disabled=not pdf_docs):
             with st.spinner("Processing..."):
                 raw_text = get_pdf_text(pdf_docs)
                 text_chunks = get_text_chunks(raw_text)
