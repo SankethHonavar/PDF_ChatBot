@@ -5,3 +5,10 @@ A smart chatbot that lets users upload PDFs and ask questions based on the conte
 - 🔗 [Live Demo](https://pdfchatbot-mgpvgpmx6ilcgdsxqerfrw.streamlit.app)
 - 📂 [Portfolio](https://your-portfolio-link.com)
 - 🧠 Tech Stack: Python, LangChain, FAISS, Streamlit, Gemini API
+
+## 🔍 Features
+- Upload any PDF and ask questions about it.
+- Uses **vector embeddings** for chunk retrieval.
+- Integrated with **Gemini Pro** for natural language answers.
+- Fast & user-friendly UI using Streamlit.
+- Designed for simple deployment on **Streamlit Cloud**.
