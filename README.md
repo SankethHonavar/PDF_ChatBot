@@ -43,13 +43,12 @@ venv\Scripts\activate        # On Windows
 source venv/bin/activate     # On macOS/Linux
 
 pip install -r requirements.txt
+```
 🔑 Setup
 Create a .env file in the root directory and add your Google API key:
-
-env
-Copy
-Edit
+```
 GOOGLE_API_KEY=your_google_gemini_api_key
+```
 🤖 How to Use
 Upload one or more PDFs from the sidebar
 
@@ -73,7 +72,7 @@ FAISS stores and retrieves relevant chunks using semantic similarity
 Gemini 1.5 Flash responds with detailed, context-aware answers
 
 📂 File Structure
-bash
+```bash
 Copy
 Edit
 📁 PDF_ChatBot
@@ -81,6 +80,7 @@ Edit
 ├── requirements.txt      # Project dependencies
 ├── .env                  # API keys (excluded from Git)
 └── faiss_index/          # Vector DB (created at runtime)
+```
 📬 Contact
 Built with ❤️ by Sanketh Honavar
 
