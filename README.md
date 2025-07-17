@@ -44,12 +44,12 @@ source venv/bin/activate     # On macOS/Linux
 
 pip install -r requirements.txt
 ```
-🔑 Setup
+## 🔑 Setup
 Create a .env file in the root directory and add your Google API key:
 ```
 GOOGLE_API_KEY=your_google_gemini_api_key
 ```
-🤖 How to Use
+## 🤖 How to Use
 Upload one or more PDFs from the sidebar
 
 Click 📎 Submit & Process
@@ -60,7 +60,7 @@ Get accurate answers based on your uploaded documents!
 
 💡 If the answer isn't found in the documents, Gemini will tell you — no hallucinations.
 
-🧠 Under the Hood
+## 🧠 Under the Hood
 PyPDF2 reads and extracts text from PDFs
 
 LangChain chunks the text and builds a QA chain
@@ -71,17 +71,15 @@ FAISS stores and retrieves relevant chunks using semantic similarity
 
 Gemini 1.5 Flash responds with detailed, context-aware answers
 
-📂 File Structure
+## 📂 File Structure
 ```bash
-Copy
-Edit
 📁 PDF_ChatBot
 ├── app.py                # Streamlit App
 ├── requirements.txt      # Project dependencies
 ├── .env                  # API keys (excluded from Git)
 └── faiss_index/          # Vector DB (created at runtime)
 ```
-📬 Contact
+## 📬 Contact
 Built with ❤️ by Sanketh Honavar
 
 📧 sankethhonavar25@gmail.com
